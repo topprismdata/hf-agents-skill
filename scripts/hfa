@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+# hfa — Friendly CLI wrapper for hf-agents
+# Usage: hfa <command> [options]
+#
+# Commands:
+#   setup           Install all dependencies
+#   recommend       Show hardware report and model recommendations
+#   run             Start local coding agent
+#   status          Check running services
+#   stop            Stop all services
+#   doctor          Diagnose issues
+#
+# Examples:
+#   hfa setup
+#   hfa recommend
+#   hfa run --model qwen
+#   hfa run --model qwen --task "write a quicksort in Python"
+#   hfa status
+#   hfa stop
+#   hfa doctor --fix
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+usage() {
+    cat <<EOF
+hfa — Local AI coding assistant powered by HuggingFace
+
+Usage: hfa <command> [options]
+
+Commands:
+  setup            Install all dependencies (llama.cpp, hf-agents, etc.)
+  recommend        Detect hardware & recommend models
+  run              Start a local coding agent
+  status           Check if services are running
+  stop             Stop all running services
+  doctor           Diagnose and fix issues
+
+Run options:
+  --model NAME     Model shortcut (qwen, phi, deepseek, gemma, llama)
+                   or HuggingFace model ID, or recommendation number
+  --port PORT      Port for llama-server (default: 8080)
+  --task TEXT      Non-interactive task to send to the agent
+
+Examples:
+  hfa setup                          # First-time setup
+  hfa recommend                      # What models can I run?
+  hfa run --model qwen               # Start Qwen coder
+  hfa run --model 1                  # Use recommendation #1
+  hfa run --task "write quicksort"   # Run with a task
+  hfa status                         # Check if running
+  hfa stop                           # Stop services
+  hfa doctor                         # Troubleshoot issues
+EOF
+}
+
+case "${1:-help}" in
+    setup)
+        shift || true
+        exec bash "$SCRIPT_DIR/setup.sh" "$@"
+        ;;
+    recommend)
+        shift || true
+        exec python3 "$SCRIPT_DIR/hardware.py" "$@"
+        ;;
+    run)
+        shift || true
+        exec python3 "$SCRIPT_DIR/run.py" "$@"
+        ;;
+    status)
+        shift || true
+        exec python3 "$SCRIPT_DIR/status.py" "$@"
+        ;;
+    stop)
+        shift || true
+        exec bash "$SCRIPT_DIR/stop.sh" "$@"
+        ;;
+    doctor)
+        shift || true
+        exec python3 "$SCRIPT_DIR/diagnose.py" "$@"
+        ;;
+    help|--help|-h)
+        usage
+        ;;
+    *)
+        echo "Unknown command: $1"
+        echo ""
+        usage
+        exit 1
+        ;;
+esac
