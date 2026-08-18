@@ -1,13 +1,15 @@
 topprism:
-  purpose: native_ai
+  purpose: native-ai
   capability: local_inference_access
-  platform_layer: organizational_intelligence
-  maturity: internal_utility
+  platform_layer: organizational-intelligence
+  maturity: internal-utility
   evidence:
-    type: internal_evaluation
-    notes: >-
+    type: internal-evaluation
+    source: topprism-internal-eval
+    scope: >-
       TopPrism internal skill-quality evaluation if a skill-tester
       score is reported; not an external benchmark.
+    status: needs-explicit-measurement
 
 business_question:
   en: >-
@@ -20,13 +22,13 @@ business_question:
     的部署？
 
 platform:
-  system: native_ai
-  layer: organizational_intelligence
-  solution: local_inference_access
+  system: native-ai
+  layer: organizational-intelligence
+  solution: local-inference-access
 
 website:
-  product_path: /native-ai/local-inference
-  evidence_path: /evidence/hf-agents-skill
+  status: planned
+  path: /native-ai/local-inference
 
 repository:
   owner: topprismdata
