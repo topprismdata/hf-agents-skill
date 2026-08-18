@@ -50,13 +50,9 @@ status / diagnostics / shutdown
 
 ## Positioning
 
-Do not lead with "Claude Code skill."
-
-The capability is:
-
-> **Local/private inference access for employee agents.**
-
-Claude Code is one current host interface.
+The capability is local / private inference access for employee agents.
+Claude Code is one current host interface; the capability itself is
+host-agnostic.
 
 ------------------------------------------------------------------------
 
@@ -76,32 +72,26 @@ Likewise, model support and throughput tables should distinguish:
 
 ------------------------------------------------------------------------
 
-## Documentation split
+## Documentation
 
-Move volatile model lists and hardware-specific recommendations to:
-
-``` text
-docs/
-├── model-matrix.md
-├── hardware.md
-├── troubleshooting.md
-└── security.md
-```
-
-README should stay stable even when model names change.
+The README stays stable across model releases. Volatile information
+(current supported model list, hardware-specific tuning notes,
+troubleshooting recipes) lives in implementation documentation that
+ships with the code and is updated independently of this README.
 
 ------------------------------------------------------------------------
 
 ## Security
 
-Add guidance for:
+Deployment owners must satisfy the following baseline before exposing the
+local inference server to other employee agents:
 
--   downloaded model provenance;
--   local server network binding;
--   prompt / code privacy;
--   model license compatibility;
--   cache locations;
--   process cleanup.
+-   downloaded model provenance and license compatibility must be
+    reviewed against the company's acceptable-use list;
+-   the local server should be bound to the intended network interface;
+-   prompt / code privacy must respect the company's data-handling policy;
+-   model cache locations and process lifecycle should be cleaned up
+    on session boundaries.
 
 ------------------------------------------------------------------------
 
