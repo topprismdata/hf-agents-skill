@@ -1,0 +1,33 @@
+topprism:
+  purpose: native_ai
+  capability: local_inference_access
+  platform_layer: organizational_intelligence
+  maturity: internal_utility
+  evidence:
+    type: internal_evaluation
+    notes: >-
+      TopPrism internal skill-quality evaluation if a skill-tester
+      score is reported; not an external benchmark.
+
+business_question:
+  en: >-
+    How can employee coding agents reliably access local / private
+    inference across Apple Silicon, CUDA and CPU environments, with
+    hardware-aware model selection and predictable deployment?
+  zh: >-
+    Employee coding agent 如何在 Apple Silicon、CUDA 和 CPU 等不同
+    环境下可靠地访问本地/私有推理，并支持硬件感知的模型选择与可预期
+    的部署？
+
+platform:
+  system: native_ai
+  layer: organizational_intelligence
+  solution: local_inference_access
+
+website:
+  product_path: /native-ai/local-inference
+  evidence_path: /evidence/hf-agents-skill
+
+repository:
+  owner: topprismdata
+  public: true
